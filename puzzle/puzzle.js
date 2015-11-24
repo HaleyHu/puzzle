@@ -1,9 +1,9 @@
 /**
- * 完成基本的拼图功能。<br>
- * 已知BUG：<br>
+ * 修订版<br>
+ * 重构重绘方法，解决重绘时的性能消耗
+ * 已知Bug：<br>
  * 1.打乱算法问题导致50%的打乱结果不能复原。<br>
- * 2.重绘方法性能问题<br>
- * 版本：0.1
+ * 版本：0.2
  */
 
 var time = 0;
@@ -51,8 +51,9 @@ function move(id) {
   if(target_d != 0){
     d[i] = 0;
     d[target_d] = id;
-    document.getElementById("d" + id).style.left = d_posXY[target_d][0] + "px";
-    document.getElementById("d" + id).style.top = d_posXY[target_d][1] + "px";
+	
+	paint(i);
+	paint(target_d);
   }
 
   var finish_flag = true;
@@ -63,7 +64,7 @@ function move(id) {
     }
   }
 
-  if(finish_flag == true){
+  if(!!finish_flag){
     if(!pause){
       start();
     }
@@ -117,19 +118,25 @@ function reset(){
 function random_d(){
   for(var i=9;i>1;--i){
     var to = parseInt(Math.random() * (i - 1) + 1);
-    if(d[i]!=0){
-      document.getElementById("d" + d[i]).style.left = d_posXY[to][0] + "px";
-      document.getElementById("d" + d[i]).style.top = d_posXY[to][1] + "px";
-    }
-    if(d[to]!=0){
-      document.getElementById("d" + d[to]).style.left = d_posXY[i][0] + "px";
-      document.getElementById("d" + d[to]).style.top = d_posXY[i][1] + "px";
-    }
-
+	
     var temp = d[to];
     d[to] = d[i];
     d[i] = temp;
   }
+  repaint();
+}
+
+function repaint(){
+	for(var i=1;i<10;i++){
+		paint(i);
+	}
+}
+
+function paint(i){
+	if(d[i] != 0){
+		document.getElementById("d" + d[i]).style.left = d_posXY[i][0] + "px";
+		document.getElementById("d" + d[i]).style.top = d_posXY[i][1] + "px";
+	}
 }
 
 window.onload = function(){

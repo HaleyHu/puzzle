@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Puzzle</title>
+  <link type="text/css" rel="stylesheet" href="puzzle.css"/>
+  <script type="text/javascript" src="puzzle.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="game">
+      <!-- Game Quarters, Big Div -->
+      <div id="d1" onclick="move(1)">1</div>
+      <div id="d2" onclick="move(2)">2</div>
+      <div id="d3" onclick="move(3)">3</div>
+      <div id="d4" onclick="move(4)">4</div>
+      <div id="d5" onclick="move(5)">5</div>
+      <div id="d6" onclick="move(6)">6</div>
+      <div id="d7" onclick="move(7)">7</div>
+      <div id="d8" onclick="move(8)">8</div>
+    </div>
+    <div id="control">
+    <!-- Control Quarters -->
+      <p>
+        <rowspan id="timeText">Total Time: </rowspan><br/>
+        <rowspan id="timer"></rowspan>
+      </p>
+      <p>
+        <rowspan id="start" onclick="start()">start</rowspan>
+        <rowspan id="reset" onclick="reset()">reset</rowspan>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+
